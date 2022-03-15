@@ -14,21 +14,22 @@ namespace Lab01a_NumbersGame
                 int num = Convert.ToInt32(input);
                 int[] arr = new int[num];
                 Populate(arr);
+                int sum = GetSum(arr);
+                int product = GetProduct(arr, sum);
+                decimal co = GetQuotient(product);
+
                 Console.WriteLine("------------------------------");
                 Console.WriteLine("Array Size: " + num);
-                Console.WriteLine("Array Elements ");
+                Console.Write("Array Elements: ");
                 foreach (int e in arr)
                 {
-                    Console.WriteLine(e);
+                    Console.Write(e+", ");
                 }
-                Console.WriteLine("------------------------------");
-                int sum = GetSum(arr);
+                
                 Console.WriteLine("Array Sum is: " + sum);
-                Console.WriteLine("------------------------------");
-                int product = GetProduct(arr, sum);
+                
                 Console.WriteLine("Array Product is: " + product);
-                Console.WriteLine("------------------------------");
-                decimal co = GetQuotient(product);
+                
                 Console.WriteLine("Array Quotient is: " + co);
             }
             catch (Exception e)
@@ -87,7 +88,7 @@ namespace Lab01a_NumbersGame
                 Console.WriteLine(e);
             }
 
-            int product = sum * num;
+            int product = sum * arr[num];
 
             return product;
         }
@@ -104,7 +105,7 @@ namespace Lab01a_NumbersGame
             }
             catch(DivideByZeroException e)
             {
-                Console.WriteLine("Cannot divide on Zero!");
+                Console.WriteLine("Cannot divide on Zero!" + e);
             }
             catch(Exception e)
             {
@@ -116,7 +117,16 @@ namespace Lab01a_NumbersGame
 
         static void Main(string[] args)
         {
-            StartSequence();
+            try {
+                StartSequence();
+            }
+            catch(Exception e) {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                Console.WriteLine("Program is complete!");
+            }
         }
     }
 
